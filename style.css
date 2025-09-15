@@ -1,0 +1,10 @@
+body {
+  background-color: #f0f8ff; /* 淡藍色背景 */
+  font-family: Helvetica, Arial, sans-serif;
+}
+a {
+  color: #5dade2; /* 淡藍色鏈接 */
+}
+.avatar img {
+  border-radius: 50%; /* 圓形頭像 */
+}
