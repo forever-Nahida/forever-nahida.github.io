@@ -1,6 +1,19 @@
 {
-    "title":"Nahida's Blog",
-    "subTitle":"Android and Windows flashing enthusiast,also likes Nahida and Genshin Impact.",
-    "avatarUrl":"https://avatars.githubusercontent.com/u/232149296?s=400&u=513fc6cd8b1aedccb0bac65d9c5aee045e15f8a2&v=4",
-    "GMEEK_VERSION":"last"
+  "title": "Nahida's Blog",
+  "subTitle": "Android & Windows enthusiast | Nahida & Genshin Impact",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/232149296?s=400&u=513fc6cd8b1aedccb0bac65d9c5aee045e15f8a2&v=4",
+  "GMEEK_VERSION": "last",
+
+  "theme": "minimalist",
+  "primaryColor": "#5dade2",    // 淡藍色
+  "backgroundColor": "#f0f8ff", // 淡藍色背景
+  "font": "Helvetica, Arial, sans-serif",
+
+  "social": {
+    "twitter": "https://twitter.com/nahida_yao"
+  },
+
+  "showExcerpt": true,
+  "excerptLength": 120,
+  "banner": "/assets/banner.jpg"
 }
