@@ -5,8 +5,8 @@
   "GMEEK_VERSION": "last",
 
   "theme": "minimalist",
-  "primaryColor": "#5dade2",    // 淡藍色
-  "backgroundColor": "#f0f8ff", // 淡藍色背景
+  "primaryColor": "#5dade2",
+  "backgroundColor": "#f0f8ff",
   "font": "Helvetica, Arial, sans-serif",
 
   "social": {
