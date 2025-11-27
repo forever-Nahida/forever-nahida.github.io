@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>forever love you</title>
+  <style>
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fafafa;
+      font-family:system-ui, sans-serif;
+      opacity:0;
+      animation:fadeIn 1.8s ease forwards;
+    }
+    .text{
+      font-size:48px;
+      font-weight:600;
+      color:#111;
+      letter-spacing:2px;
+      transform:translateY(12px);
+      opacity:0;
+      animation:rise 1.8s ease .3s forwards;
+    }
+    @keyframes fadeIn{
+      0%{opacity:0}
+      100%{opacity:1}
+    }
+    @keyframes rise{
+      0%{opacity:0;transform:translateY(20px)}
+      100%{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="text">forever love you</div>
+</body>
+</html>
