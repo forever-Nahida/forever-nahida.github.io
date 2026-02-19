@@ -3,103 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChunHo's Land</title>
+    <title>ChunHo's Land v2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0a0a0a; color: #e5e5e5; overflow-x: hidden; }
-        .tech-border { border: 1px solid #262626; }
-        .glow:hover { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
-        
-        .typing {
-            overflow: hidden;
-            border-right: .15em solid #3b82f6;
-            white-space: nowrap;
-            margin: 0;
-            letter-spacing: -0.05em;
-            animation: typing 2s steps(20, end), blink-caret .75s step-end infinite;
+        body { 
+            background-color: #050505; color: #e5e5e5; 
+            font-family: 'Share Tech Mono', monospace; 
+            overflow-x: hidden; 
         }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #3b82f6; } }
-
-        /* 系统日志动画 */
-        .log-text { font-size: 10px; color: #404040; animation: fade 3s infinite; }
-        @keyframes fade { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+            background-size: 100% 4px; pointer-events: none; z-index: 1000;
+        }
+        .tech-border { border: 1px solid #1a1a1a; background: rgba(10, 10, 10, 0.8); }
+        .glow:hover { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center font-mono p-6">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
 
-    <div class="fixed top-4 left-4 font-mono log-text hidden md:block">
-        <p>[ OK ] SHIFTING_TO_BACKBONE...</p>
-        <p>[ OK ] ANDROID_DEBUG_BRIDGE_READY</p>
-        <p>[ OK ] VPS_ENCRYPTED_TUNNEL_ACTIVE</p>
-    </div>
-
-    <div class="max-w-xl w-full">
-        <header class="mb-12">
-            <div class="inline-block">
-                <h1 class="text-3xl font-bold tracking-tighter text-white typing">ChunHo's Land</h1>
-            </div>
-            <p class="text-gray-500 mt-2 text-sm uppercase tracking-[0.4em]">forever</p>
+    <div class="max-w-4xl w-full z-10">
+        <header class="mb-12 border-l-4 border-blue-600 pl-6">
+            <h1 class="text-4xl font-bold tracking-tighter text-white uppercase italic">ChunHo's Land</h1>
+            <p class="text-blue-400 mt-1 text-xs uppercase tracking-[0.8em] font-bold">forever</p>
         </header>
 
-        <div class="space-y-8">
-            <section class="tech-border p-6 rounded-lg glow transition-all">
-                <p class="text-blue-400 mb-2 text-xs"># STATUS</p>
-                <p class="text-lg text-gray-200">14 years old, Student.</p>
-                <div class="flex items-center text-gray-500 mt-2 text-xs uppercase tracking-wider">
-                    <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-                    CN-TELECOM / <span id="ping-text" class="ml-1 text-green-400">PINGING...</span>
-                </div>
-                <div class="mt-4 pt-4 border-t border-gray-900 text-[10px] text-gray-600">
-                    VISITOR_IP: <span id="visitor-ip" class="text-gray-400">DETECTION_PENDING...</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <section class="tech-border p-6 rounded-sm glow transition-all relative">
+                <p class="text-blue-500 mb-4 text-[10px] tracking-[0.2em] font-bold">// 01_NETWORK</p>
+                <div class="flex items-end justify-between space-x-4">
+                    <div class="flex-1">
+                        <p class="text-lg">PING</p>
+                        <p id="ping-text" class="text-green-500 text-[10px] mt-1">Delay: 0MS</p>
+                        <p id="visitor-ip" class="text-blue-900 text-[10px] mt-1 uppercase font-bold">IP: DETECTING...</p>
+                    </div>
+                    <div class="w-32 h-12">
+                        <svg viewBox="0 0 120 40" class="w-full h-full">
+                            <path id="live-curve" d="M0 30 Q 15 35, 30 20 T 60 25 T 90 10 T 120 30" fill="none" stroke="#3b82f6" stroke-width="1.5" />
+                        </svg>
+                    </div>
                 </div>
             </section>
 
-            <section class="tech-border p-6 rounded-lg glow transition-all">
-                <p class="text-green-400 mb-2 text-xs"># INTERESTS</p>
-                <ul class="space-y-2 text-gray-300">
-                    <li><span class="text-gray-600 mr-2">></span> Android / Flashing (Kernel & ROM)</li>
-                    <li><span class="text-gray-600 mr-2">></span> VPS / Linux Hardening</li>
-                    <li><span class="text-gray-600 mr-2">></span> Endless Tinkering</li>
-                </ul>
+            <section class="tech-border p-6 rounded-sm glow transition-all">
+                <p class="text-purple-500 mb-4 text-[10px] tracking-[0.2em] font-bold">// 02_IDENTITY</p>
+                <div class="space-y-2">
+                    <p class="text-lg">14 Years Old, Student.</p>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest italic">Focusing on Various Kinds of Trouble</p>
+                </div>
             </section>
 
-            <section class="tech-border p-6 rounded-lg glow transition-all">
-                <p class="text-red-400 mb-2 text-xs"># CONNECT</p>
-                <div class="grid grid-cols-2 gap-4">
-                    <a href="https://youtube.com/forever_Nahida" class="text-sm text-gray-400 hover:text-red-400 transition-colors italic">[ YouTube ]</a>
-                    <a href="https://t.me/q_4ever" class="text-sm text-gray-400 hover:text-blue-400 transition-colors italic">[ Telegram ]</a>
+            <section class="tech-border p-6 rounded-sm glow transition-all md:col-span-2">
+                <p class="text-green-500 mb-2 text-[10px] tracking-[0.2em] font-bold">// 03_Targets</p>
+                <p class="text-sm text-gray-400 italic font-mono uppercase text-[11px]">
+                    > Android / Flashing / VPS / Linux
+                </p>
+            </section>
+
+            <section class="tech-border p-6 rounded-sm glow transition-all md:col-span-2">
+                <p class="text-red-500 mb-4 text-[10px] tracking-[0.2em] font-bold uppercase">// 04_CONNECT</p>
+                <div class="flex space-x-8 text-xs font-bold">
+                    <a href="https://youtube.com/forever_Nahida" target="_blank" class="text-gray-500 hover:text-white transition-all underline decoration-gray-800 underline-offset-4 tracking-[0.2em] uppercase">[ YouTube ]</a>
+                    <a href="https://t.me/q_4ever" target="_blank" class="text-gray-500 hover:text-white transition-all underline decoration-gray-800 underline-offset-4 tracking-[0.2em] uppercase">[ Telegram ]</a>
                 </div>
             </section>
         </div>
 
-        <footer class="mt-20 pb-10 text-center">
-            <p class="text-[10px] tracking-[0.5em] text-gray-700 uppercase">Copyright © 2026 ChunHo</p>
+        <footer class="mt-16 flex justify-between items-center text-[9px] text-gray-700 uppercase tracking-widest">
+            <p>Copyright © 2026 ChunHo Version:2026/2/20</p>
+            <p id="clock">UTC+8 00:00:00</p>
         </footer>
     </div>
 
     <script>
-        // Ping 检测
+        function animateTraffic() {
+            const curve = document.getElementById('live-curve');
+            setInterval(() => {
+                const p1 = Math.floor(Math.random() * 30 + 5);
+                const p2 = Math.floor(Math.random() * 30 + 5);
+                const d = `M0 30 Q 15 ${p1}, 30 ${p2} T 60 ${p1} T 90 ${p2} T 120 30`;
+                curve.setAttribute('d', d);
+            }, 800);
+        }
+        animateTraffic();
+
         function updatePing() {
             const start = Date.now();
-            fetch('https://www.baidu.com/favicon.ico', { mode: 'no-cors', cache: 'no-cache' })
-                .then(() => {
-                    document.getElementById('ping-text').innerText = `PING: ${Date.now() - start}ms`;
+            fetch('https://www.baidu.com/favicon.ico?t=' + start, { mode: 'no-cors', cache: 'no-cache' })
+                .then(() => { 
+                    const ms = Date.now() - start;
+                    document.getElementById('ping-text').innerText = `Delay: ${ms}MS`; 
                 })
-                .catch(() => { document.getElementById('ping-text').innerText = 'BACKBONE_LAG'; });
+                .catch(() => { document.getElementById('ping-text').innerText = 'LINK_ERROR'; });
         }
-        setInterval(updatePing, 3000);
-        updatePing();
+        setInterval(updatePing, 3000); updatePing();
 
-        // IP 检测
-        fetch('https://api.ipify.org?format=json')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('visitor-ip').innerText = data.ip;
-            })
-            .catch(() => {
-                document.getElementById('visitor-ip').innerText = 'ENCRYPTED_NODE';
-            });
+        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => {
+            document.getElementById('visitor-ip').innerText = `IP: ${d.ip}`;
+        });
+        
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = 'UTC+8 ' + now.toTimeString().split(' ')[0];
+        }, 1000);
     </script>
 </body>
 </html>
