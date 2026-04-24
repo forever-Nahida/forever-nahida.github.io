@@ -3,112 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChunHo's Land v2</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Forever</title>
     <style>
-        body { 
-            background-color: #050505; color: #e5e5e5; 
-            font-family: 'Share Tech Mono', monospace; 
-            overflow-x: hidden; 
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Arial Black', sans-serif; }
+        canvas { display: block; }
+        #text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: clamp(8rem, 20vw, 30rem); color: #fff; text-align: center;
+            filter: drop-shadow(0 0 20px #0ff); animation: glow 2s ease-in-out infinite alternate;
+            z-index: 10; pointer-events: none;
         }
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-            background-size: 100% 4px; pointer-events: none; z-index: 1000;
-        }
-        .tech-border { border: 1px solid #1a1a1a; background: rgba(10, 10, 10, 0.8); }
-        .glow:hover { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.1); }
+        @keyframes glow { from { filter: drop-shadow(0 0 20px #0ff); } to { filter: drop-shadow(0 0 50px #f0f); } }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
-
-    <div class="max-w-4xl w-full z-10">
-        <header class="mb-12 border-l-4 border-blue-600 pl-6">
-            <h1 class="text-4xl font-bold tracking-tighter text-white uppercase italic">ChunHo's Land</h1>
-            <p class="text-blue-400 mt-1 text-xs uppercase tracking-[0.8em] font-bold">forever</p>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <section class="tech-border p-6 rounded-sm glow transition-all relative">
-                <p class="text-blue-500 mb-4 text-[10px] tracking-[0.2em] font-bold">// 01_NETWORK</p>
-                <div class="flex items-end justify-between space-x-4">
-                    <div class="flex-1">
-                        <p class="text-lg">PING</p>
-                        <p id="ping-text" class="text-green-500 text-[10px] mt-1">Delay: 0MS</p>
-                        <p id="visitor-ip" class="text-blue-900 text-[10px] mt-1 uppercase font-bold">IP: DETECTING...</p>
-                    </div>
-                    <div class="w-32 h-12">
-                        <svg viewBox="0 0 120 40" class="w-full h-full">
-                            <path id="live-curve" d="M0 30 Q 15 35, 30 20 T 60 25 T 90 10 T 120 30" fill="none" stroke="#3b82f6" stroke-width="1.5" />
-                        </svg>
-                    </div>
-                </div>
-            </section>
-
-            <section class="tech-border p-6 rounded-sm glow transition-all">
-                <p class="text-purple-500 mb-4 text-[10px] tracking-[0.2em] font-bold">// 02_IDENTITY</p>
-                <div class="space-y-2">
-                    <p class="text-lg">14 Years Old, Student.</p>
-                    <p class="text-xs text-gray-500 uppercase tracking-widest italic">Focusing on Various Kinds of Trouble</p>
-                </div>
-            </section>
-
-            <section class="tech-border p-6 rounded-sm glow transition-all md:col-span-2">
-                <p class="text-green-500 mb-2 text-[10px] tracking-[0.2em] font-bold">// 03_Targets</p>
-                <p class="text-sm text-gray-400 italic font-mono uppercase text-[11px]">
-                    > Android / Flashing / VPS / Linux
-                </p>
-            </section>
-
-            <section class="tech-border p-6 rounded-sm glow transition-all md:col-span-2">
-                <p class="text-red-500 mb-4 text-[10px] tracking-[0.2em] font-bold uppercase">// 04_CONNECT</p>
-                <div class="flex space-x-8 text-xs font-bold">
-                    <a href="https://youtube.com/@forever_Nahida" target="_blank" class="text-gray-500 hover:text-white transition-all underline decoration-gray-800 underline-offset-4 tracking-[0.2em] uppercase">[ YouTube ]</a>
-                    <a href="https://t.me/q_4ever" target="_blank" class="text-gray-500 hover:text-white transition-all underline decoration-gray-800 underline-offset-4 tracking-[0.2em] uppercase">[ Telegram ]</a>
-                </div>
-            </section>
-        </div>
-
-        <footer class="mt-16 flex justify-between items-center text-[9px] text-gray-700 uppercase tracking-widest">
-            <p>Copyright © 2026 ChunHo Version:2026/2/20</p>
-            <p id="clock">UTC+8 00:00:00</p>
-        </footer>
-    </div>
-
+<body>
+    <canvas id="bg"></canvas>
+    <div id="text">forever</div>
     <script>
-        function animateTraffic() {
-            const curve = document.getElementById('live-curve');
-            setInterval(() => {
-                const p1 = Math.floor(Math.random() * 30 + 5);
-                const p2 = Math.floor(Math.random() * 30 + 5);
-                const d = `M0 30 Q 15 ${p1}, 30 ${p2} T 60 ${p1} T 90 ${p2} T 120 30`;
-                curve.setAttribute('d', d);
-            }, 800);
-        }
-        animateTraffic();
+        // WebGL波浪背景
+        const canvas = document.getElementById('bg');
+        const gl = canvas.getContext('webgl');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
 
-        function updatePing() {
-            const start = Date.now();
-            fetch('https://www.baidu.com/favicon.ico?t=' + start, { mode: 'no-cors', cache: 'no-cache' })
-                .then(() => { 
-                    const ms = Date.now() - start;
-                    document.getElementById('ping-text').innerText = `Delay: ${ms}MS`; 
-                })
-                .catch(() => { document.getElementById('ping-text').innerText = 'LINK_ERROR'; });
-        }
-        setInterval(updatePing, 3000); updatePing();
+        const vsSource = `#version 100
+            attribute vec2 position; varying vec2 vUv; void main() { vUv = position * .5 + .5; gl_Position = vec4(position, 0, 1); }`;
+        const fsSource = `#version 100
+            precision mediump float; uniform float time; varying vec2 vUv;
+            void main() {
+                vec2 p = vUv * 2. - 1.; p.x *= canvas.width / canvas.height;
+                float d = length(p); float wave = sin(d * 10. - time * 2.) * .1;
+                vec3 color = vec3(sin(time + p.x), cos(time + p.y), sin(time * .5));
+                gl_FragColor = vec4(color * (1. - smoothstep(.8, 1., d + wave)), 1.);
+            }`;
 
-        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => {
-            document.getElementById('visitor-ip').innerText = `IP: ${d.ip}`;
-        });
-        
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('clock').innerText = 'UTC+8 ' + now.toTimeString().split(' ')[0];
-        }, 1000);
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader); return shader;
+        }
+        const program = gl.createProgram();
+        gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vsSource));
+        gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fsSource));
+        gl.linkProgram(program); gl.useProgram(program);
+
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,-1,1,1,-1,1]), gl.STATIC_DRAW);
+
+        const posLoc = gl.getAttribLocation(program, 'position'); gl.enableVertexAttribArray(posLoc);
+        gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+        const timeLoc = gl.getUniformLocation(program, 'time');
+        function render(time) { gl.uniform1f(timeLoc, time * 0.001); gl.drawArrays(gl.TRIANGLES, 0, 6); requestAnimationFrame(render); }
+        render(0);
+
+        // 粒子效果围绕文字
+        const particles = [];
+        for (let i = 0; i < 200; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - .5) * 2,
+                vy: (Math.random() - .5) * 2,
+                life: Math.random()
+            });
+        }
+        const ctx = gl.canvas.getContext('2d');
+        function animateParticles(time) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy; p.life += 0.01;
+                if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
+                    p.x = Math.random() * canvas.width; p.y = Math.random() * canvas.height;
+                }
+                ctx.save(); ctx.globalAlpha = Math.sin(p.life) * 0.5; ctx.fillStyle = '#0ff';
+                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles(0);
+
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; gl.viewport(0,0,canvas.width,canvas.height); });
     </script>
 </body>
 </html>
-
